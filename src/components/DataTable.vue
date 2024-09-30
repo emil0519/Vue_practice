@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { defineProps, type Ref } from "vue";
+import { defineProps } from "vue";
 import type { ResultListType } from "@/type";
 import { getSplitTime } from "../utilis";
 import { SortEnum } from "@/type";
@@ -29,7 +29,7 @@ const { resultList } = props;
     <tbody>
       <tr
         v-for="result in resultList"
-        :key="`${result.first_name}_${result.last_name}_${result.nationality}`"
+        :key="`${result.first_name}_${result.last_name}_${result.nationality}_${result.division}`"
       >
         <td>{{ result.first_name }}</td>
         <td>{{ result.last_name }}</td>

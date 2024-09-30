@@ -7,9 +7,10 @@ import DataTable from "./components/DataTable.vue";
 import Loading from "./components/Loading.vue";
 import Error from "./components/Error.vue";
 
-const { resultList, isLoading, isError } = useFetchData({
-  sortOption: SortEnum.Total_Time,
-});
+const { resultList, isLoading, isError, sortOption } = useFetchData();
+const updateSortOption = (newSortOption: SortEnum): void => {
+  sortOption.value = newSortOption;
+};
 </script>
 
 <template>
@@ -18,7 +19,8 @@ const { resultList, isLoading, isError } = useFetchData({
     <div v-if="isLoading"><Loading /></div>
     <div v-if="isError"><Error /></div>
     <div v-if="!isLoading && !isError && resultList">
-      <Filter /> <DataTable :resultList="resultList" />
+      <Filter :sortOption="sortOption" @update-sort-option="updateSortOption" />
+      <DataTable :resultList="resultList" />
     </div>
   </main>
 </template>
