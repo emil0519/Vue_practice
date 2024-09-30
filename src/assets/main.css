@@ -1,3 +1,8 @@
 @import "./base.css";
 
-
+:root {
+  --main: #000000;
+  --light: #d4d3d4;
+  --dark: #292929;
+  --contrast: #ba0c2e;
+}
