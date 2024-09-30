@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { useFetchData } from "./assets/composables/useFetchData";
 import { SortEnum } from "./type";
-import Header from './components/Header.vue'; // Adjust the path as necessary
+import Header from './components/Header.vue'; 
+import Filter from './components/Filter.vue'; 
 
 
 const { resultList, isLoading, isError } = useFetchData({ sortOption: SortEnum.Total_Time });
@@ -11,7 +12,7 @@ const { resultList, isLoading, isError } = useFetchData({ sortOption: SortEnum.T
 <template>
 <Header></Header>
   <main class="container">
-    
+    <Filter></Filter>
   </main>
 </template>
 
