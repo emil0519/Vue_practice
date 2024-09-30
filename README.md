@@ -1,33 +1,18 @@
-# vue_practice
+<div align="center">
 
-This template should help get you started developing with Vue 3 in Vite.
+  <h3 align="center">Vue Practice </h3>
+    <div>This is my first Vue.js Project, aim to practice my skill</div>
+    <div><a href="https://vue-practice-5bc8f.web.app/">Demo</a></div>
+</div>
 
-## Recommended IDE Setup
+## Set up in local environment:
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+Open terminal, copy & paste the following command:
 
-## Type Support for `.vue` Imports in TS
-
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
 ```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Type-Check, Compile and Minify for Production
-
-```sh
-npm run build
+    mkdir emil_vue_practice
+    cd emil_vue_practice
+    git clone https://github.com/emil0519/applicant-task.git .
+    npm i
+    npm run dev
 ```

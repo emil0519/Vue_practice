@@ -1,11 +1,42 @@
+<script setup lang="ts">
+import { SortEnum } from "@/type";
+import { defineProps, defineEmits, ref, watch } from "vue";
+import { dropDownOptionList } from "../constant";
+
+const props = defineProps<{
+  sortOption: SortEnum;
+}>();
+
+const emit = defineEmits<{
+  (e: "update-sort-option", newSortOption: SortEnum): void;
+}>();
+
+const selectedSortOption = ref(props.sortOption);
+
+watch(
+  () => props.sortOption,
+  (newVal) => {
+    selectedSortOption.value = newVal;
+  }
+);
+
+function onSortChange() {
+  emit("update-sort-option", selectedSortOption.value);
+}
+</script>
+
 <template>
   <div class="filter">
     <div class="filter-container">
       <h2 class="filter-title">Search for Triathlon result</h2>
       <div class="filter-controls">
         <p class="base-on-text">Based on</p>
-        <select id="sort-results-select" class="select">
-          <!-- v-model="sortOption" @change="handleSelectOption" -->
+        <select
+          v-model="selectedSortOption"
+          id="sort-results-select"
+          class="select"
+          @change="onSortChange"
+        >
           <option
             v-for="option in dropDownOptionList"
             :key="option.value"
@@ -14,20 +45,10 @@
             {{ option.label }}
           </option>
         </select>
-        <!-- <input
-          type="text"
-          placeholder="Name / Nationality"
-          @input="handleSearchText"
-          class="search-input"
-        /> -->
       </div>
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-import { dropDownOptionList } from "../constant";
-</script>
 
 <style scoped>
 .filter {
