@@ -15,7 +15,7 @@ export const dropDownOptionList: DropDownOptionListType[] = [
     value: SortEnum.Swim_Time,
   },
   {
-    label: "BikeTime",
+    label: "Bike Time",
     value: SortEnum.Bike_Time,
   },
   {
