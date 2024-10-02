@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useFetchData } from "./assets/composables/useFetchData";
+import { useFetchData } from "./composables/useFetchData";
 import { SortEnum } from "./type";
 import Header from "./components/Header.vue";
 import Filter from "./components/Filter.vue";
