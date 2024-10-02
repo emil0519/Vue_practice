@@ -1,9 +1,19 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const props = defineProps<{
+  fetchAthletes: () => Promise<void>;
+}>();
+const { fetchAthletes } = props;
+</script>
 
 <template>
   <div class="container">
     <h2 class="error-text">Something went wrong, please try again.</h2>
-    <img src="@/assets/retry.png" alt="Retry Icon" class="retry-icon" />
+    <img
+      src="@/assets/retry.png"
+      alt="Retry Icon"
+      class="retry-icon"
+      @click="fetchAthletes"
+    />
   </div>
 </template>
 

@@ -2,16 +2,18 @@
 import { SortEnum } from "@/type";
 import { defineProps, defineEmits, ref, watch } from "vue";
 import { dropDownOptionList } from "../constant";
+import Select from "primevue/select";
 
 const props = defineProps<{
   sortOption: SortEnum;
 }>();
+const { sortOption } = props;
 
 const emit = defineEmits<{
   (e: "update-sort-option", newSortOption: SortEnum): void;
 }>();
 
-const selectedSortOption = ref(props.sortOption);
+const selectedSortOption = ref(sortOption);
 
 watch(
   () => props.sortOption,
@@ -28,23 +30,18 @@ function onSortChange() {
 <template>
   <div class="filter">
     <div class="filter-container">
-      <h2 class="filter-title">Search for Triathlon result</h2>
       <div class="filter-controls">
-        <p class="base-on-text">Based on</p>
-        <select
-          v-model="selectedSortOption"
-          id="sort-results-select"
-          class="select"
-          @change="onSortChange"
-        >
-          <option
-            v-for="option in dropDownOptionList"
-            :key="option.value"
-            :value="option.value"
-          >
-            {{ option.label }}
-          </option>
-        </select>
+        <h2 class="filter-title">Search for Triathlon result</h2>
+        <div class="base-on-container">
+          <p class="base-on-text">Based on</p>
+          <Select
+            v-model="selectedSortOption"
+            :options="dropDownOptionList"
+            optionLabel="label"
+            optionValue="value"
+            @change="onSortChange"
+          />
+        </div>
       </div>
     </div>
   </div>
@@ -69,9 +66,13 @@ function onSortChange() {
 
 .filter-controls {
   display: flex;
-  align-items: flex-start;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.base-on-container {
+  display: flex;
   gap: 8px;
-  flex-direction: column;
 }
 
 .base-on-text {
