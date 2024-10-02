@@ -7,6 +7,7 @@ interface ReturnType {
   isLoading: Ref<boolean>;
   isError: Ref<boolean>;
   sortOption: Ref<SortEnum>;
+  fetchAthletes: () => Promise<void>;
 }
 
 export const useFetchData = (): ReturnType => {
@@ -14,28 +15,27 @@ export const useFetchData = (): ReturnType => {
   const isLoading = ref<boolean>(false);
   const isError = ref<boolean>(false);
   const sortOption = ref<SortEnum>(SortEnum.Total_Time);
-
+  const fetchAthletes = async () => {
+    try {
+      isLoading.value = true;
+      isError.value = false;
+      const response = await fetch(
+        "https://core.xterraplanet.com/api/application-task/cee4389b-1668-4e39-b500-3572f0982b09"
+      );
+      if (!response.ok)
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      const data: ResultListType[] = await response.json();
+      const replacedData = replaceOutliers(data, ["00:00:00", "23:59:59"]);
+      const sortedData = sortData(replacedData, sortOption.value);
+      resultList.value = sortedData;
+    } catch (error) {
+      console.error("Error fetching athletes:", error);
+      isError.value = true;
+    } finally {
+      isLoading.value = false;
+    }
+  };
   onMounted(async () => {
-    const fetchAthletes = async () => {
-      try {
-        isLoading.value = true;
-        isError.value = false;
-        const response = await fetch(
-          "https://core.xterraplanet.com/api/application-task/cee4389b-1668-4e39-b500-3572f0982b09"
-        );
-        if (!response.ok)
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        const data: ResultListType[] = await response.json();
-        const replacedData = replaceOutliers(data, ["00:00:00", "23:59:59"]);
-        const sortedData = sortData(replacedData, sortOption.value);
-        resultList.value = sortedData;
-      } catch (error) {
-        console.error("Error fetching athletes:", error);
-        isError.value = true;
-      } finally {
-        isLoading.value = false;
-      }
-    };
     fetchAthletes();
   });
 
@@ -46,5 +46,5 @@ export const useFetchData = (): ReturnType => {
     }
   });
 
-  return { resultList, isLoading, isError, sortOption };
+  return { resultList, isLoading, isError, sortOption, fetchAthletes };
 };
